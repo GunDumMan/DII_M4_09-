@@ -17,7 +17,6 @@ var students = [
     }
 ]
 
-console.log(students)
 function addRow(container, key, value) {
     let row = document.createElement('div')
     row.classList.add('row')
@@ -36,30 +35,37 @@ function addRow(container, key, value) {
 function addStudentData(student) {
     const output = document.getElementById('output')
     addRow(output, 'ชื่อ', student.name)
-    addRow(output, 'Email', student.email)
+    addRow(output, 'Email', student.imageLink)
     addRow(output, 'Gender', student.gender)
 }
 var count = 1;
 function addTable(index, student) {
+    const tableBody = document.getElementById('inputTable')
     let row = document.createElement('tr')
+    let cell = document.createElement('th')
+    cell.setAttribute('scope', 'row')
+    cell.innerHTML = index
+    row.appendChild(cell)
 
-    let dataCount = document.createElement('td');
-    dataCount.innerText = index
+    cell = document.createElement('td')
+    cell.innerHTML = student.name
+    row.appendChild(cell)
 
-    let dataName = document.createElement('td');
-    dataName.innerText = student.name
+    cell = document.createElement('td')
+    cellbeforeImg = document.createElement('div')
+    cellbeforeImg.classList.add('img-fluid')
+    let img = document.createElement('img')
+    img.setAttribute('src', student.imageLink)
+    img.setAttribute('width', '50em')
+    cellbeforeImg.appendChild(img)
+    cell.appendChild(cellbeforeImg)
+    row.appendChild(cell)
 
-    let dataEmail = document.createElement('td');
-    dataEmail.innerText = student.email
+    cell = document.createElement('td')
+    cell.innerHTML = student.gender
+    row.appendChild(cell)
 
-    let dataGender = document.createElement('td');
-    dataGender.innerText = student.gender
-
-    row.appendChild(dataCount)
-    row.appendChild(dataName)
-    row.appendChild(dataEmail)
-    row.appendChild(dataGender)
-    table.appendChild(row)
+    tableBody.appendChild(row)
 }
 
 function addStudentList(studentList) {
@@ -70,6 +76,13 @@ function addStudentList(studentList) {
 }
 
 
-window.addEventListener('load', function () {
-    addStudentList(students)
-})
+function onload() {
+    fetch('asset/students2.json').then(response => {
+        return response.json().then(data => {
+            let students = data
+            addStudentList(students)
+        })
+    })
+
+
+}
