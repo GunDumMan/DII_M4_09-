@@ -35,8 +35,8 @@ function addRow(container, key, value) {
 function addStudentData(student) {
     const output = document.getElementById('output')
     addRow(output, 'ชื่อ', student.name)
-    addRow(output, 'Email', student.imageLink)
-    addRow(output, 'Gender', student.gender)
+    addRow(output, 'Email', student.image)
+    addRow(output, 'Gender', student.gpa)
 }
 var count = 1;
 function addTable(index, student) {
@@ -55,14 +55,14 @@ function addTable(index, student) {
     cellbeforeImg = document.createElement('div')
     cellbeforeImg.classList.add('img-fluid')
     let img = document.createElement('img')
-    img.setAttribute('src', student.imageLink)
+    img.setAttribute('src', student.image)
     img.setAttribute('width', '50em')
     cellbeforeImg.appendChild(img)
     cell.appendChild(cellbeforeImg)
     row.appendChild(cell)
 
     cell = document.createElement('td')
-    cell.innerHTML = student.gender
+    cell.innerHTML = student.gpa
     row.appendChild(cell)
 
     tableBody.appendChild(row)
@@ -77,7 +77,7 @@ function addStudentList(studentList) {
 
 
 function onload() {
-    fetch('asset/students2.json').then(response => {
+    fetch('https://dv-student-backend-2019.appspot.com/students').then(response => {
         return response.json().then(data => {
             let students = data
             addStudentList(students)
