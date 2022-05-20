@@ -1,52 +1,75 @@
+var table = document.getElementById('inputTable')
+var students = [
+    student = {
+        name: 'คุณลุง',
+        email: 'a@B.com',
+        gender: 'ชาย'
+    },
+    {
+        name: 'คุณลุง',
+        email: 'a@B.com',
+        gender: 'ชาย'
+    },
+    {
+        name: 'คุณลุง',
+        email: 'a@B.com',
+        gender: 'ชาย'
+    }
+]
 
-var student = {}
-student.name = 'คุณลุง'
-student.email = 'a@B.com'
-student.gender = 'ชาย'
-function addStudentData(student) {
-    const output = document.getElementById('output')
+console.log(students)
+function addRow(container, key, value) {
     let row = document.createElement('div')
     row.classList.add('row')
     let columName = document.createElement('div')
     columName.classList.add('col-1')
     columName.classList.add('offset-1')
-    columName.innerText = 'ชื่อ'
+    columName.innerText = key
     let columValue = document.createElement('div')
     columValue.classList.add('col')
-    columValue.innerHTML = student.name;
-
-    let row2 = document.createElement('div')
-    row2.classList.add('row')
-    let columEmail = document.createElement('div')
-    columEmail.classList.add('col-1')
-    columEmail.classList.add('offset-1')
-    columEmail.innerText = 'Email'
-    let columValue1 = document.createElement('div')
-    columValue1.classList.add('col')
-    columValue1.innerHTML = student.email;
-
-    let row3 = document.createElement('div')
-    row3.classList.add('row')
-    let columGender = document.createElement('div')
-    columGender.classList.add('col-1')
-    columGender.classList.add('offset-1')
-    columGender.innerText = 'gender'
-    let columValue2 = document.createElement('div')
-    columValue2.classList.add('col')
-    columValue2.innerHTML = student.gender;
-
+    columValue.innerHTML = value;
     row.appendChild(columName)
     row.appendChild(columValue)
-    row2.appendChild(columEmail)
-    row2.appendChild(columValue1)
-    row3.appendChild(columGender)
-    row3.appendChild(columValue2)
+    container.appendChild(row)
 
-    output.appendChild(row)
-    output.appendChild(row2)
-    output.appendChild(row3)
+}
+function addStudentData(student) {
+    const output = document.getElementById('output')
+    addRow(output, 'ชื่อ', student.name)
+    addRow(output, 'Email', student.email)
+    addRow(output, 'Gender', student.gender)
+}
+var count = 1;
+function addTable(index, student) {
+    let row = document.createElement('tr')
+
+    let dataCount = document.createElement('td');
+    dataCount.innerText = index
+
+    let dataName = document.createElement('td');
+    dataName.innerText = student.name
+
+    let dataEmail = document.createElement('td');
+    dataEmail.innerText = student.email
+
+    let dataGender = document.createElement('td');
+    dataGender.innerText = student.gender
+
+    row.appendChild(dataCount)
+    row.appendChild(dataName)
+    row.appendChild(dataEmail)
+    row.appendChild(dataGender)
+    table.appendChild(row)
 }
 
+function addStudentList(studentList) {
+    let counter = 1
+    for (student of studentList) {
+        addTable(counter++, student);
+    }
+}
+
+
 window.addEventListener('load', function () {
-    addStudentData(student)
+    addStudentList(students)
 })
