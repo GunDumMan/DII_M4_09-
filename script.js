@@ -33,10 +33,17 @@ function addRow(container, key, value) {
 
 }
 function addStudentData(student) {
-    const output = document.getElementById('output')
-    addRow(output, 'ชื่อ', student.name)
-    addRow(output, 'Email', student.image)
-    addRow(output, 'Gender', student.gpa)
+    let idElem = document.getElementById('id')
+    idElem.innerHTML = student.id
+    let studentIDElem = document.getElementById('studentId')
+    studentIDElem.innerHTML = student.studentId
+    let nameElem = document.getElementById('name')
+    nameElem.innerHTML = `${student.name} ${student.surname}`
+    let gpaElem = document.getElementById('gpa')
+    gpaElem.innerHTML = student.gpa
+    let profileElem = document.getElementById('image')
+    profileElem.setAttribute("src", student.image)
+    console.log(student.image)
 }
 var count = 1;
 function addTable(index, student) {
@@ -70,17 +77,15 @@ function addTable(index, student) {
 
 function addStudentList(studentList) {
     let counter = 1
-    for (student of studentList) {
-        addTable(counter++, student);
-    }
+    addTable(counter++, studentList);
+
 }
 
 
 function onload() {
-    fetch('https://dv-student-backend-2019.appspot.com/students').then(response => {
+    fetch('https://dv-student-backend-2019.appspot.com/student').then(response => {
         return response.json().then(data => {
-            let students = data
-            addStudentList(students)
+            addStudentData(data)
         })
     })
 
