@@ -48,7 +48,7 @@ function addTable(index, student) {
     row.appendChild(cell)
 
     cell = document.createElement('td')
-    cell.innerHTML = student.name
+    cell.innerHTML = `${student.name} ${student.surname}`
     row.appendChild(cell)
 
     cell = document.createElement('td')
@@ -56,7 +56,8 @@ function addTable(index, student) {
     cellbeforeImg.classList.add('img-fluid')
     let img = document.createElement('img')
     img.setAttribute('src', student.image)
-    img.setAttribute('width', '50em')
+    img.setAttribute('width', '60em')
+    img.classList.add('img-thumbnail')
     cellbeforeImg.appendChild(img)
     cell.appendChild(cellbeforeImg)
     row.appendChild(cell)
@@ -79,8 +80,7 @@ function addStudentList(studentList) {
 function onload() {
     fetch('https://dv-student-backend-2019.appspot.com/students').then(response => {
         return response.json().then(data => {
-            let students = data
-            addStudentList(students)
+            addStudentList(data)
         })
     })
 
