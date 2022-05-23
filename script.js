@@ -93,4 +93,38 @@ document.getElementById('searchButton').addEventListener('click', () => {
         }).then(student => {
             addStudentData(student)
         })
-}) 
+})
+
+function OnLoad() {
+    deleteStudent(11)
+}
+
+function addStudentToDB(student) {
+    fetch(`https://dv-student-backend-2019.appspot.com/students`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(student)
+    }).then(response => {
+        return response.json()
+    }).then(data => {
+        console.log('success', data)
+    })
+}
+
+function deleteStudent(id) {
+    fetch(`https://dv-student-backend-2019.appspot.com/student/${id}`, {
+        method: 'DELETE'
+    }).then(response => {
+        if (response.status === 200) {
+            return response.json()
+        } else {
+            throw Error(response.statusText)
+        }
+    }).then(data => {
+        alert(`student name ${data.name} is now deleted`)
+    }).catch(error => {
+        alert('your input student id is not in the database')
+    })
+}
