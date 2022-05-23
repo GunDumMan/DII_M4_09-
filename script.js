@@ -112,7 +112,7 @@ document.getElementById('searchButton').addEventListener('click', () => {
 })
 
 function OnLoad() {
-    showAllStudent()
+    hideAll()
 }
 
 function addStudentToDB(student) {
@@ -164,4 +164,14 @@ function showAllStudent() {
         }).then(data => {
             addStudentList(data)
         })
+}
+
+var singleStudentResult = document.getElementById('sinigle_student_result')
+var listStudentResult = document.getElementById('output')
+var addUserDetails = document.getElementById('formAddStudent')
+
+function hideAll() {
+    singleStudentResult.style.display = 'none'
+    listStudentResult.style.display = 'none'
+    addUserDetails.style.display = 'none'
 }
