@@ -80,8 +80,10 @@ function addTable(index, student) {
     button.setAttribute('type', 'button')
     button.innerText = 'delete'
     button.addEventListener('click', function () {
-        deleteStudent(student.id)
-        showAllStudent()
+        let confirmButton = confirm(`ท่านต้องการลบคุณ ${student.name} หรือไม่`)
+        if (confirmButton) {
+            deleteStudent(student.id)
+        }
     })
     cell.appendChild(button)
     row.appendChild(cell)
@@ -90,6 +92,8 @@ function addTable(index, student) {
 
 function addStudentList(studentList) {
     let counter = 1
+    const tableBody = document.getElementById('inputTable')
+    tableBody.innerHTML = ''
     for (student of studentList) {
         addTable(counter++, student);
     }
@@ -109,7 +113,6 @@ document.getElementById('searchButton').addEventListener('click', () => {
 
 function OnLoad() {
     showAllStudent()
-
 }
 
 function addStudentToDB(student) {
@@ -138,6 +141,7 @@ function deleteStudent(id) {
         }
     }).then(data => {
         alert(`student name ${data.name} is now deleted`)
+        showAllStudent()
     }).catch(error => {
         alert('your input student id is not in the database')
     })
