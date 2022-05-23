@@ -86,7 +86,11 @@ function addTable(index, student) {
         }
     })
     cell.appendChild(button)
+    row.addEventListener('click', function () {
+        showStudentBlocks(student)
+    })
     row.appendChild(cell)
+
     tableBody.appendChild(row)
 }
 
@@ -112,7 +116,7 @@ document.getElementById('searchButton').addEventListener('click', () => {
 })
 
 function OnLoad() {
-    hideAll()
+    showAllStudentBlock()
 }
 
 function addStudentToDB(student) {
@@ -175,3 +179,28 @@ function hideAll() {
     listStudentResult.style.display = 'none'
     addUserDetails.style.display = 'none'
 }
+
+document.getElementById('allStudentMenu').addEventListener('click', (event) => {
+    showAllStudentBlock()
+
+})
+
+document.getElementById('addStudentMenu').addEventListener('click', (event) => {
+    hideAll()
+    addUserDetails.style.display = 'block'
+})
+
+function showStudentBlocks(student) {
+    hideAll()
+    singleStudentResult.style.display = 'block'
+    addStudentData(student)
+}
+
+function showAllStudentBlock() {
+    hideAll()
+    listStudentResult.style.display = 'block'
+    showAllStudent()
+}
+
+
+
