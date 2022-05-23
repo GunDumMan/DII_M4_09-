@@ -33,10 +33,17 @@ function addRow(container, key, value) {
 
 }
 function addStudentData(student) {
-    const output = document.getElementById('output')
-    addRow(output, 'ชื่อ', student.name)
-    addRow(output, 'image', student.image)
-    addRow(output, 'Gender', student.gpa)
+    let idElem = document.getElementById('id')
+    idElem.innerHTML = student.id
+    let studentIdElem = document.getElementById('studentId')
+    studentIdElem.innerHTML = student.studentId
+    let nameElem = document.getElementById('name')
+    nameElem.innerHTML = `${student.name} ${student.surname}`
+    let gpaElem = document.getElementById('gpa')
+    gpaElem.innerHTML = student.gpa
+    let profileElem = document.getElementById('image')
+    profileElem.setAttribute('src', student.image)
+
 }
 var count = 1;
 function addTable(index, student) {
