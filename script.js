@@ -35,7 +35,7 @@ function addRow(container, key, value) {
 function addStudentData(student) {
     const output = document.getElementById('output')
     addRow(output, 'ชื่อ', student.name)
-    addRow(output, 'Email', student.image)
+    addRow(output, 'image', student.image)
     addRow(output, 'Gender', student.gpa)
 }
 var count = 1;
@@ -77,12 +77,13 @@ function addStudentList(studentList) {
 }
 
 
-function onload() {
-    fetch('https://dv-student-backend-2019.appspot.com/students').then(response => {
-        return response.json().then(data => {
-            addStudentList(data)
+document.getElementById('searchButton').addEventListener('click', () => {
+    let id = document.getElementById('inputText').value
+    console.log(id)
+    fetch(`https://dv-student-backend-2019.appspot.com/student/${id}`)
+        .then(response => {
+            return response.json()
+        }).then(student => {
+            addStudentData(student)
         })
-    })
-
-
-}
+}) 
