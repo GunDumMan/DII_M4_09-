@@ -96,7 +96,15 @@ document.getElementById('searchButton').addEventListener('click', () => {
 })
 
 function OnLoad() {
-    deleteStudent(11)
+    student = {
+        name: "TOP",
+        surname: "Thammanun",
+        studentId: "642110318",
+        gpa: "999999.99",
+        image: "https://scontent.fbkk10-1.fna.fbcdn.net/v/t31.18172-8/21587259_939420292888498_3231167830924572319_o.jpg?_nc_cat=105&ccb=1-7&_nc_sid=ad2b24&_nc_eui2=AeELjf6gH9oD-MD_ganyJhgKSiRlKjBD72BKJGUqMEPvYMLgscw3HoiLciB6EFfVANWHsFhR_LyuwwEprkVBbGrK&_nc_ohc=jX3QDF7lv4kAX9O76Dx&_nc_ht=scontent.fbkk10-1.fna&oh=00_AT-x6MoR9OyqDLaez7WobgZP53o8YTnReyWugX3qw2H7cQ&oe=62AEBB08"
+
+    }
+    addStudentToDB(student)
 }
 
 function addStudentToDB(student) {
@@ -114,7 +122,7 @@ function addStudentToDB(student) {
 }
 
 function deleteStudent(id) {
-    fetch(`https://dv-student-backend-2019.appspot.com/student/${id}`, {
+    fetch(`https://dv-student-backend-2019.appspot.com/students/${id}`, {
         method: 'DELETE'
     }).then(response => {
         if (response.status === 200) {
@@ -123,7 +131,7 @@ function deleteStudent(id) {
             throw Error(response.statusText)
         }
     }).then(data => {
-        alert(`student name ${data.name} is now deleted`)
+        alert('student name ${data.name} is now deleted')
     }).catch(error => {
         alert('your input student id is not in the database')
     })
